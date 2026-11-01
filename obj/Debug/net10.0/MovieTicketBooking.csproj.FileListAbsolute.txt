@@ -160,7 +160,6 @@ D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\staticwebassets.build
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\staticwebassets.development.json
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\swae.build.ex.cache
-D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTic.AFEBDB25.Up2Date
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.dll
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\refint\MovieTicketBooking.dll
@@ -168,3 +167,4 @@ D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.pd
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.genruntimeconfig.cache
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\ref\MovieTicketBooking.dll
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.sourcelink.json
+D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
