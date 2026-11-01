@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MovieTicketBooking.Data;
+using MovieTicketBooking.Interfaces;
 using MovieTicketBooking.Repositories;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services;
@@ -16,6 +17,9 @@ builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 // Services Injection
 builder.Services.AddScoped<IMovieService, MovieService>();
+
+builder.Services.AddScoped<ITheaterRepository, TheaterRepository>();
+builder.Services.AddScoped<ITheaterService, TheaterService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

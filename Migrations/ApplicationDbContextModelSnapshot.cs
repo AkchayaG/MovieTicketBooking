@@ -59,6 +59,34 @@ namespace MovieTicketBooking.Migrations
 
                     b.ToTable("Movies");
                 });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Theater", b =>
+                {
+                    b.Property<int>("TheaterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TheaterId"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalScreens")
+                        .HasColumnType("int");
+
+                    b.HasKey("TheaterId");
+
+                    b.ToTable("Theaters");
+                });
 #pragma warning restore 612, 618
         }
     }
