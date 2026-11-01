@@ -114,6 +114,38 @@ namespace MovieTicketBooking.Migrations
                     b.ToTable("Seats");
                 });
 
+            modelBuilder.Entity("MovieTicketBooking.Models.Show", b =>
+                {
+                    b.Property<int>("ShowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShowId"));
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ScreenId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ShowId");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("ScreenId");
+
+                    b.ToTable("Shows");
+                });
+
             modelBuilder.Entity("MovieTicketBooking.Models.Theater", b =>
                 {
                     b.Property<int>("TheaterId")
@@ -162,9 +194,35 @@ namespace MovieTicketBooking.Migrations
                     b.Navigation("Screen");
                 });
 
+            modelBuilder.Entity("MovieTicketBooking.Models.Show", b =>
+                {
+                    b.HasOne("MovieTicketBooking.Models.Movie", "Movie")
+                        .WithMany("Shows")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieTicketBooking.Models.Screen", "Screen")
+                        .WithMany("Shows")
+                        .HasForeignKey("ScreenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Screen");
+                });
+
+            modelBuilder.Entity("MovieTicketBooking.Models.Movie", b =>
+                {
+                    b.Navigation("Shows");
+                });
+
             modelBuilder.Entity("MovieTicketBooking.Models.Screen", b =>
                 {
                     b.Navigation("Seats");
+
+                    b.Navigation("Shows");
                 });
 
             modelBuilder.Entity("MovieTicketBooking.Models.Theater", b =>

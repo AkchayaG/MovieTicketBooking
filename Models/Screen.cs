@@ -11,5 +11,6 @@
         // Navigation Property back to Theatre
         public Theater? Theater { get; set; }
         public ICollection<Seat> Seats { get; set; } = new List<Seat>();
+        public ICollection<Show> Shows { get; set; } = new List<Show>();
     }
 }
