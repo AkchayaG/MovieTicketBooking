@@ -1,4 +1,5 @@
 ﻿using MovieTicketBooking.Dtos;
+using MovieTicketBooking.Models;
 
 namespace MovieTicketBooking.Interfaces
 {
@@ -8,6 +9,7 @@ namespace MovieTicketBooking.Interfaces
         Task<SeatResponse?> GetSeatByIdAsync(int id);
         Task<IEnumerable<SeatResponse>> GetSeatsByScreenIdAsync(int screenId);
         Task<SeatResponse> CreateSeatAsync(CreateSeatRequest request);
+        Task<bool> CreateBulkSeatsAsync(int screenId, List<CreateSeatRequest> seatRequests); // <-- Bulk creation added
         Task<bool> UpdateSeatAsync(int id, CreateSeatRequest request);
         Task<bool> DeleteSeatAsync(int id);
     }

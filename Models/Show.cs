@@ -11,9 +11,11 @@
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public decimal Price { get; set; }
+        public decimal TicketPrice { get; set; }
 
         // Navigation Properties
         public Movie? Movie { get; set; }
         public Screen? Screen { get; set; }
+
     }
 }

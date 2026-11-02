@@ -45,6 +45,23 @@ namespace MovieTicketBooking.Services
             return MapToResponse(created);
         }
 
+        // Bulk Seats Create Method (Interface-kku thevaiyanathu)
+        public async Task<bool> CreateBulkSeatsAsync(int screenId, List<CreateSeatRequest> seatRequests)
+        {
+            foreach (var request in seatRequests)
+            {
+                var seat = new Seat
+                {
+                    ScreenId = screenId,
+                    RowName = request.RowName,
+                    SeatNumber = request.SeatNumber,
+                    SeatType = request.SeatType
+                };
+                await _seatRepository.AddAsync(seat);
+            }
+            return true;
+        }
+
         public async Task<bool> UpdateSeatAsync(int id, CreateSeatRequest request)
         {
             var existing = await _seatRepository.GetByIdAsync(id);
