@@ -5,10 +5,10 @@ namespace MovieTicketBooking.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+        
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Theater> Theaters { get; set; }
@@ -18,6 +18,7 @@ namespace MovieTicketBooking.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingSeat> BookingSeats { get; set; }
         public DbSet<ShowSeat> ShowSeats { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

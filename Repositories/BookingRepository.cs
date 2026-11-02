@@ -17,26 +17,26 @@ namespace MovieTicketBooking.Repositories
         public async Task<Booking?> GetByIdAsync(int id)
         {
             return await _context.Bookings
-                .Include(b => b.Show)
-                    .ThenInclude(s => s.Movie)
-                .Include(b => b.Show)
-                    .ThenInclude(s => s.Screen)
-                        .ThenInclude(sc => sc.Theater)
-                .Include(b => b.BookingSeats)
-                    .ThenInclude(bs => bs.Seat)
+                .Include(b => b.Show!)
+                    .ThenInclude(s => s.Movie!)
+                .Include(b => b.Show!)
+                    .ThenInclude(s => s.Screen!)
+                        .ThenInclude(sc => sc.Theater!)
+                .Include(b => b.BookingSeats!)
+                    .ThenInclude(bs => bs.Seat!)
                 .FirstOrDefaultAsync(b => b.BookingId == id);
         }
 
         public async Task<IEnumerable<Booking>> GetAllAsync()
         {
             return await _context.Bookings
-                .Include(b => b.Show)
-                    .ThenInclude(s => s.Movie)
-                .Include(b => b.Show)
-                    .ThenInclude(s => s.Screen)
-                        .ThenInclude(sc => sc.Theater)
-                .Include(b => b.BookingSeats)
-                    .ThenInclude(bs => bs.Seat)
+                .Include(b => b.Show!)
+                    .ThenInclude(s => s.Movie!)
+                .Include(b => b.Show!)
+                    .ThenInclude(s => s.Screen!)
+                        .ThenInclude(sc => sc.Theater!)
+                .Include(b => b.BookingSeats!)
+                    .ThenInclude(bs => bs.Seat!)
                 .ToListAsync();
         }
 
@@ -59,7 +59,7 @@ namespace MovieTicketBooking.Repositories
         public async Task<List<ShowSeat>> GetShowSeatsAsync(int showId, List<int> seatIds)
         {
             return await _context.ShowSeats
-                .Include(ss => ss.Seat)
+                .Include(ss => ss.Seat!)
                 .Where(ss => ss.ShowId == showId && seatIds.Contains(ss.SeatId))
                 .ToListAsync();
         }
@@ -74,7 +74,7 @@ namespace MovieTicketBooking.Repositories
         public async Task<bool> IsAnySeatBookedAsync(int showId, List<int> seatIds)
         {
             return await _context.BookingSeats
-                .AnyAsync(bs => bs.Booking.ShowId == showId && seatIds.Contains(bs.SeatId));
+                .AnyAsync(bs => bs.Booking!.ShowId == showId && seatIds.Contains(bs.SeatId));
         }
 
         public async Task AddBookingSeatAsync(BookingSeat bookingSeat)
