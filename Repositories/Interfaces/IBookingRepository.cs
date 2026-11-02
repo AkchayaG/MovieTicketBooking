@@ -6,11 +6,14 @@ namespace MovieTicketBooking.Repositories.Interfaces
     {
         Task<Booking?> GetByIdAsync(int id);
         Task<IEnumerable<Booking>> GetAllAsync();
-        Task<IEnumerable<Booking>> GetByShowIdAsync(int showId);
-        Task<Booking> AddAsync(Booking booking);
+        Task AddAsync(Booking booking);
         Task UpdateAsync(Booking booking);
-   
         Task SaveChangesAsync();
+
+        // Helper methods for validation and seat mapping
         Task<List<ShowSeat>> GetShowSeatsAsync(int showId, List<int> seatIds);
+        Task<IEnumerable<Seat>> GetSeatsByScreenAndIdsAsync(int screenId, List<int> seatIds);
+        Task<bool> IsAnySeatBookedAsync(int showId, List<int> seatIds);
+        Task AddBookingSeatAsync(BookingSeat bookingSeat);
     }
 }

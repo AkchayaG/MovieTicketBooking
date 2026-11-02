@@ -22,9 +22,6 @@ namespace MovieTicketBooking.Services
             var booking = await _bookingRepository.GetByIdAsync(id);
             if (booking == null) return null;
 
-            // Fetch booked seats for this booking
-            var bookingSeats = await _bookingRepository.GetShowSeatsAsync(booking.ShowId, new List<int>()); // or query BookingSeats table directly via context if needed
-            // Let's map directly:
             return MapToResponse(booking);
         }
 
@@ -36,22 +33,25 @@ namespace MovieTicketBooking.Services
 
         public async Task<BookingResponse> CreateBookingAsync(CreateBookingRequest request)
         {
+            // 1. Fetch Show Details
             var show = await _showRepository.GetByIdAsync(request.ShowId);
-            if (show == null) throw new KeyNotFoundException("Show not found.");
+            if (show == null)
+                throw new KeyNotFoundException("Show not found.");
 
-            var showSeats = await _bookingRepository.GetShowSeatsAsync(request.ShowId, request.SeatIds);
+            // 2. Fetch Seats for this Show's Screen
+            var validSeats = await _bookingRepository.GetSeatsByScreenAndIdsAsync(show.ScreenId, request.SeatIds);
 
-            if (showSeats.Count != request.SeatIds.Count)
+            if (validSeats.Count() != request.SeatIds.Count)
                 throw new InvalidOperationException("One or more requested seats are invalid for this show.");
 
-            foreach (var ss in showSeats)
-            {
-                if (ss.Status != "Available")
-                    throw new InvalidOperationException($"Seat {ss.Seat?.RowName}{ss.Seat?.SeatNumber} is already booked.");
-            }
+            // 3. Check if any requested seat is already booked for this show
+            var isAlreadyBooked = await _bookingRepository.IsAnySeatBookedAsync(request.ShowId, request.SeatIds);
+            if (isAlreadyBooked)
+                throw new InvalidOperationException("One or more requested seats are already booked.");
 
             decimal totalAmount = show.TicketPrice * request.SeatIds.Count;
 
+            // 4. Create Booking Entry
             var booking = new Booking
             {
                 BookingReference = "MOV" + new Random().Next(1000, 9999),
@@ -65,13 +65,17 @@ namespace MovieTicketBooking.Services
             };
 
             await _bookingRepository.AddAsync(booking);
-            await _bookingRepository.SaveChangesAsync(); // To get BookingId
+            await _bookingRepository.SaveChangesAsync(); // Save to generate BookingId
 
-            // Add BookingSeats and update ShowSeats status
-            foreach (var ss in showSeats)
+            // 5. Add BookingSeats mapping
+            foreach (var seatId in request.SeatIds)
             {
-                ss.Status = "Booked";
-                // If you have DbContext directly or via repository, add BookingSeats
+                await _bookingRepository.AddBookingSeatAsync(new BookingSeat
+                {
+                    BookingId = booking.BookingId,
+                    SeatId = seatId,
+                    Price = show.TicketPrice
+                });
             }
 
             await _bookingRepository.SaveChangesAsync();
@@ -107,7 +111,7 @@ namespace MovieTicketBooking.Services
                 BookingDate = booking.BookingDate,
                 TotalAmount = booking.TotalAmount,
                 Status = booking.Status,
-                Seats = new List<string>() // Can be populated from BookingSeats
+                Seats = booking.BookingSeats?.Select(bs => $"{bs.Seat?.RowName}{bs.Seat?.SeatNumber}").ToList() ?? new List<string>()
             };
         }
     }

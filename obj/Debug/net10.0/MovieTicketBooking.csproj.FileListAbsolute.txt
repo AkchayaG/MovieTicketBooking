@@ -9,8 +9,10 @@ D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\MovieTicketBooking.pd
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Azure.Core.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Azure.Identity.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Humanizer.dll
+D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.Bcl.Cryptography.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.Build.Framework.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.CodeAnalysis.dll
 D:\MovieTicketBooking\MovieTicketBooking\bin\Debug\net10.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -151,6 +153,7 @@ D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.As
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.csproj.CoreCompileInputs.cache
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.MvcApplicationPartsAssemblyInfo.cs
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.MvcApplicationPartsAssemblyInfo.cache
+D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.sourcelink.json
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\rjimswa.dswa.cache.json
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -166,5 +169,4 @@ D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\refint\MovieTicketBoo
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.pdb
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.genruntimeconfig.cache
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\ref\MovieTicketBooking.dll
-D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\MovieTicketBooking.sourcelink.json
 D:\MovieTicketBooking\MovieTicketBooking\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

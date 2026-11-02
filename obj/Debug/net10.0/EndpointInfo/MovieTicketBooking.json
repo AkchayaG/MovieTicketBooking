@@ -963,7 +963,7 @@
             "type": "string",
             "nullable": true
           },
-          "theatreId": {
+          "theaterId": {
             "type": "integer",
             "format": "int32"
           }

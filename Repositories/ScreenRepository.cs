@@ -27,7 +27,7 @@ namespace MovieTicketBooking.Repositories
         public async Task<IEnumerable<Screen>> GetByTheatreIdAsync(int theatreId)
         {
             return await _context.Screens
-                .Where(s => s.TheatreId == theatreId)
+                .Where(s => s.TheaterId == theatreId)
                 .Include(s => s.Theater)
                 .ToListAsync();
         }

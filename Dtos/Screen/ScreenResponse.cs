@@ -4,7 +4,7 @@
     {
         public int ScreenId { get; set; }
         public string ScreenName { get; set; } = string.Empty;
-        public int TheatreId { get; set; }
+        public int TheaterId { get; set; }
         public string TheatreName { get; set; } = string.Empty;
     }
 }

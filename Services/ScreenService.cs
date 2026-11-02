@@ -36,7 +36,7 @@ namespace MovieTicketBooking.Services
             var screen = new Screen
             {
                 ScreenName = request.ScreenName,
-                TheatreId = request.TheatreId
+                TheaterId = request.TheaterId
             };
 
             var created = await _screenRepository.AddAsync(screen);
@@ -49,7 +49,7 @@ namespace MovieTicketBooking.Services
             if (existing == null) return false;
 
             existing.ScreenName = request.ScreenName;
-            existing.TheatreId = request.TheatreId;
+            existing.TheaterId = request.TheaterId;
 
             return await _screenRepository.UpdateAsync(existing);
         }
@@ -63,7 +63,7 @@ namespace MovieTicketBooking.Services
         {
             ScreenId = s.ScreenId,
             ScreenName = s.ScreenName,
-            TheatreId = s.TheatreId,
+            TheaterId = s.TheaterId,
             TheatreName = s.Theater != null ? s.Theater.Name : string.Empty
         };
     }

@@ -6,7 +6,7 @@
         public string ScreenName { get; set; } = string.Empty;
 
         // Foreign Key
-        public int TheatreId { get; set; }
+        public int TheaterId { get; set; }
 
         // Navigation Property back to Theatre
         public Theater? Theater { get; set; }
