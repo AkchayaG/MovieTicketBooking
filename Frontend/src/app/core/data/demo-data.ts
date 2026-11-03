@@ -1,0 +1,10 @@
+import { Movie } from '../models/movie.model';
+
+export const DEMO_MOVIES: Movie[] = [
+  { movieId: 1, title: 'The Last Horizon', genre: 'Sci-Fi / Adventure', language: 'English', durationMinutes: 148, releaseDate: '2026-10-28', description: 'A breathtaking journey beyond the edge of the known universe. One crew. One final chance to bring humanity home.', rating: 'U/A 13+', poster: 'https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg', status: 'Now Showing' },
+  { movieId: 2, title: 'Midnight in Mumbai', genre: 'Thriller / Drama', language: 'Hindi', durationMinutes: 132, releaseDate: '2026-10-30', description: 'When the city sleeps, a quiet taxi ride turns into a race against time.', rating: 'U/A 16+', poster: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg', status: 'Now Showing' },
+  { movieId: 3, title: 'Echoes of Tomorrow', genre: 'Drama / Romance', language: 'Tamil', durationMinutes: 139, releaseDate: '2026-10-24', description: 'Two strangers discover that some connections are written long before they meet.', rating: 'U', poster: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg', status: 'Now Showing' },
+  { movieId: 4, title: 'Kingdom of Ash', genre: 'Action / Fantasy', language: 'English', durationMinutes: 156, releaseDate: '2026-11-12', description: 'A fallen kingdom. A hidden heir. A legend ready to rise.', rating: 'U/A 13+', poster: 'https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg', status: 'Coming Soon' },
+  { movieId: 5, title: 'The Silent Code', genre: 'Mystery / Crime', language: 'Tamil', durationMinutes: 126, releaseDate: '2026-10-31', description: 'A cyber investigator follows a trail that should never have existed.', rating: 'U/A 16+', poster: 'https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg', status: 'Now Showing' },
+  { movieId: 6, title: 'Ocean of Stars', genre: 'Animation / Family', language: 'English', durationMinutes: 108, releaseDate: '2026-11-20', description: 'A little explorer finds a whole new world beneath the waves.', rating: 'U', poster: 'https://image.tmdb.org/t/p/w500/5aXG0B3p4V4q4QZ4p4q4QZ4p4q4.jpg', status: 'Coming Soon' }
+];
