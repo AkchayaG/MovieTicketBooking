@@ -13,8 +13,15 @@ namespace MovieTicketBooking.Models
         public string BookingReference { get; set; } = string.Empty;
 
         public int ShowId { get; set; }
+
         [ForeignKey("ShowId")]
         public Show? Show { get; set; }
+
+        // Booking owner
+        public int? UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -26,7 +33,7 @@ namespace MovieTicketBooking.Models
 
         [Required]
         [MaxLength(15)]
-        public string CustomerPhone { get; set; } = string.Empty; // Note: 'get { set; }' check pannikonga
+        public string CustomerPhone { get; set; } = string.Empty;
 
         public DateTime BookingDate { get; set; } = DateTime.UtcNow;
 
@@ -36,6 +43,7 @@ namespace MovieTicketBooking.Models
         [Required]
         [MaxLength(20)]
         public string Status { get; set; } = "Confirmed";
-        public ICollection<BookingSeat>? BookingSeats { get; set; }// Confirmed, Cancelled
+
+        public ICollection<BookingSeat>? BookingSeats { get; set; }
     }
 }

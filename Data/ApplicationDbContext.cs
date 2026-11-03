@@ -23,6 +23,13 @@ namespace MovieTicketBooking.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // User -> Bookings
+            modelBuilder.Entity<Booking>()
+                .HasOne(b => b.User)
+                .WithMany(u => u.Bookings)
+                .HasForeignKey(b => b.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Screen -> Theater
             modelBuilder.Entity<Screen>()
@@ -34,22 +41,32 @@ namespace MovieTicketBooking.Data
             // Seat -> Screen
             modelBuilder.Entity<Seat>()
                 .HasOne(s => s.Screen)
-                .WithMany()
+                .WithMany(s => s.Seats)
                 .HasForeignKey(s => s.ScreenId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Show -> Movie & Screen
+            // Show -> Movie
             modelBuilder.Entity<Show>()
                 .HasOne(s => s.Movie)
-                .WithMany()
+                .WithMany(m => m.Shows)
                 .HasForeignKey(s => s.MovieId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Show -> Screen
             modelBuilder.Entity<Show>()
                 .HasOne(s => s.Screen)
-                .WithMany()
+                .WithMany(s => s.Shows)
                 .HasForeignKey(s => s.ScreenId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Decimal precision
+            modelBuilder.Entity<Show>()
+                .Property(s => s.Price)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Show>()
+                .Property(s => s.TicketPrice)
+                .HasPrecision(10, 2);
 
             // Booking -> Show
             modelBuilder.Entity<Booking>()
@@ -58,31 +75,34 @@ namespace MovieTicketBooking.Data
                 .HasForeignKey(b => b.ShowId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // BookingSeat Relationships
+            // BookingSeat -> Booking
             modelBuilder.Entity<BookingSeat>()
                 .HasOne(bs => bs.Booking)
                 .WithMany(b => b.BookingSeats)
                 .HasForeignKey(bs => bs.BookingId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // BookingSeat -> Seat
             modelBuilder.Entity<BookingSeat>()
                 .HasOne(bs => bs.Seat)
                 .WithMany()
                 .HasForeignKey(bs => bs.SeatId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // ShowSeat Relationships
+            // ShowSeat -> Show
             modelBuilder.Entity<ShowSeat>()
                 .HasOne(ss => ss.Show)
                 .WithMany()
                 .HasForeignKey(ss => ss.ShowId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // ShowSeat -> Seat
             modelBuilder.Entity<ShowSeat>()
                 .HasOne(ss => ss.Seat)
                 .WithMany()
                 .HasForeignKey(ss => ss.SeatId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
+
     }
 }

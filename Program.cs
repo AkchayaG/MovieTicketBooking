@@ -57,6 +57,17 @@ builder.Services.AddScoped<ISeatService, SeatService>();
 builder.Services.AddScoped<IShowService, ShowService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+// CORS Configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularFrontend", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4201")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -97,6 +108,8 @@ using (var scope = app.Services.CreateScope())
 
     var admin = await context.Users
         .FirstOrDefaultAsync(u => u.Username == username);
+    Console.WriteLine($"Database: {context.Database.GetDbConnection().Database}");
+    Console.WriteLine($"Admin found: {admin != null}");
 
     if (admin == null)
     {
@@ -126,12 +139,6 @@ using (var scope = app.Services.CreateScope())
             "Configured admin username belongs to a non-admin account.");
     }
 
-    Console.WriteLine("========== ADMIN DETAILS ==========");
-    Console.WriteLine($"Username : {username}");
-    Console.WriteLine($"Email    : {email}");
-    Console.WriteLine($"Password : {password}");
-    Console.WriteLine("Role     : Admin");
-    Console.WriteLine("===================================");
 }
 
 if (app.Environment.IsDevelopment())
@@ -142,6 +149,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AngularFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 

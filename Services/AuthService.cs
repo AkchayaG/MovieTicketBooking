@@ -77,7 +77,7 @@ namespace MovieTicketBooking.Services
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(2),
+                expires: DateTime.UtcNow.AddSeconds(180),
                 signingCredentials: creds
             );
 

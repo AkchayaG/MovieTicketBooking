@@ -108,6 +108,18 @@
         }
       }
     },
+    "/api/bookings/my-bookings": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/bookings/{id}": {
       "get": {
         "tags": [

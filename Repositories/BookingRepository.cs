@@ -39,6 +39,20 @@ namespace MovieTicketBooking.Repositories
                     .ThenInclude(bs => bs.Seat!)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Booking>> GetByUserIdAsync(int userId)
+        {
+            return await _context.Bookings
+                .Where(b => b.UserId == userId)
+                .Include(b => b.Show!)
+                    .ThenInclude(s => s.Movie!)
+                .Include(b => b.Show!)
+                    .ThenInclude(s => s.Screen!)
+                        .ThenInclude(sc => sc.Theater!)
+                .Include(b => b.BookingSeats!)
+                    .ThenInclude(bs => bs.Seat!)
+                .OrderByDescending(b => b.BookingDate)
+                .ToListAsync();
+        }
 
         public async Task AddAsync(Booking booking)
         {

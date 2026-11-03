@@ -4,9 +4,17 @@ namespace MovieTicketBooking.Services.Interfaces
 {
     public interface IBookingService
     {
-        Task<BookingResponse?> GetBookingByIdAsync(int id);
+        Task<BookingResponse?> GetBookingByIdAsync(
+            int id, int userId, bool isAdmin);
+
         Task<IEnumerable<BookingResponse>> GetAllBookingsAsync();
-        Task<BookingResponse> CreateBookingAsync(CreateBookingRequest request);
-        Task<bool> CancelBookingAsync(int id);
+
+        Task<IEnumerable<BookingResponse>> GetMyBookingsAsync(int userId);
+
+        Task<BookingResponse> CreateBookingAsync(
+            CreateBookingRequest request, int userId);
+
+        Task<bool> CancelBookingAsync(
+            int id, int userId, bool isAdmin);
     }
 }
