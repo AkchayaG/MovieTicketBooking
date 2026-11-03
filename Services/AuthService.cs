@@ -32,14 +32,22 @@ namespace MovieTicketBooking.Services
                 Username = request.Username,
                 Email = request.Email,
                 PasswordHash = HashPassword(request.Password),
-                Role = string.IsNullOrEmpty(request.Role) ? "Customer" : request.Role
+
+                // Customer role is assigned by server only
+                Role = "Customer"
             };
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
             var token = GenerateJwtToken(user);
-            return new AuthResponseDto { Token = token, Username = user.Username, Role = user.Role };
+
+            return new AuthResponseDto
+            {
+                Token = token,
+                Username = user.Username,
+                Role = user.Role
+            };
         }
 
         public async Task<AuthResponseDto> LoginAsync(LoginRequestDto request)

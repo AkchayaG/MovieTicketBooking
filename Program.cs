@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +9,7 @@ using MovieTicketBooking.Repositories;
 using MovieTicketBooking.Repositories.Interfaces;
 using MovieTicketBooking.Services;
 using MovieTicketBooking.Services.Interfaces;
+using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,8 +83,56 @@ builder.Services.AddSwaggerGen(options =>
         [new OpenApiSecuritySchemeReference("Bearer", document)] = []
     });
 });
-
+builder.Services.AddAuthorization();
 var app = builder.Build();
+// Automatically create Admin account
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider
+        .GetRequiredService<ApplicationDbContext>();
+
+    var username = app.Configuration["AdminAccount:Username"]!;
+    var email = app.Configuration["AdminAccount:Email"]!;
+    var password = app.Configuration["AdminAccount:Password"]!;
+
+    var admin = await context.Users
+        .FirstOrDefaultAsync(u => u.Username == username);
+
+    if (admin == null)
+    {
+        using var sha256 = SHA256.Create();
+
+        var passwordBytes = sha256.ComputeHash(
+            Encoding.UTF8.GetBytes(password));
+
+        var passwordHash = Convert.ToBase64String(passwordBytes);
+
+        admin = new MovieTicketBooking.Models.User
+        {
+            Username = username,
+            Email = email,
+            PasswordHash = passwordHash,
+            Role = "Admin"
+        };
+
+        context.Users.Add(admin);
+        await context.SaveChangesAsync();
+
+        Console.WriteLine("Admin account created!");
+    }
+    else if (admin.Role != "Admin")
+    {
+        throw new InvalidOperationException(
+            "Configured admin username belongs to a non-admin account.");
+    }
+
+    Console.WriteLine("========== ADMIN DETAILS ==========");
+    Console.WriteLine($"Username : {username}");
+    Console.WriteLine($"Email    : {email}");
+    Console.WriteLine($"Password : {password}");
+    Console.WriteLine("Role     : Admin");
+    Console.WriteLine("===================================");
+}
 
 if (app.Environment.IsDevelopment())
 {
